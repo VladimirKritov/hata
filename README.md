@@ -14,10 +14,15 @@
 <BOT_TOKEN>
 <CHANNEL_ID>
 ```
-6. Створити в корені проекту файл locations.txt і там вказати населені пункти, в яких необхідно здійснювати пошук. Написання населених пунктів необхідно брати з урла на olx.ua, вибираючи там локацію. Наприклад, https://www.olx.ua/d/nedvizhimost/kvartiry/dolgosrochnaya-arenda-kvartir/ternopol/?currency=UAH
+Пример:
+```commandline
+5114004139:AAEKliiwO-MPm2PDhb5Ej5wcztBre4TGIUU
+-1051663062839
+```
+7. Створити в корені проекту файл locations.txt і там вказати населені пункти, в яких необхідно здійснювати пошук. Написання населених пунктів необхідно брати з урла на olx.ua, вибираючи там локацію. Наприклад, https://www.olx.ua/d/nedvizhimost/kvartiry/dolgosrochnaya-arenda-kvartir/ternopol/?currency=UAH
 ```commandline
 chernovtsy
 ternopol
 uzhgorod
 ```
-7. Виконати команду запуску у терміналі: ```sh run.sh```
+8. Виконати команду запуску у терміналі: ```sh run.sh```
