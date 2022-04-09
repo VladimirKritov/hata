@@ -14,7 +14,7 @@
 <BOT_TOKEN>
 <CHANNEL_ID>
 ```
-Пример:
+Приклад:
 ```commandline
 5114004139:AAEKliiwO-MPm2PDhb5Ej5wcztBre4TGIUU
 -1051663062839
