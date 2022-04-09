@@ -1,6 +1,8 @@
 
 # hata - пошук житла на OLX.UA
 
+### Сервіс який переглядає оголошення з орендою житла на olx.ua у вибраних населених пунктах та одразу надсилає нові оголошення у необхідну telegram групу
+
 1. Встановити Python3 (https://www.python.org/downloads/), Docker (https://docs.docker.com/engine/install/) та Docker-Compose (https://docs.docker.com/compose/install/).
 2. Клонувати проект ```git clone https://github.com/VladimirKritov/hata.git```
 3. Створити telegram бота та отримати токен.
@@ -12,7 +14,7 @@
 6. Створити в корені проекту файл token.txt і там вказати токен бота та id групи:
 ```commandline
 <BOT_TOKEN>
-<CHANNEL_ID>
+<CHAT_ID>
 ```
 Приклад:
 ```commandline
