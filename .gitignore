@@ -1,0 +1,6 @@
+.idea/
+__pycache__/
+data.txt
+docker-compose.yml
+locations.txt
+token.txt
