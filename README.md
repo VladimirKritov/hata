@@ -22,36 +22,27 @@
 
 <img src="readme_images/create_chat_01.jpg" width="240"/>
 <br/>
-<br/>
 <img src="readme_images/create_chat_02.jpg" width="240"/>
-<br/>
 <br/>
 <img src="readme_images/create_chat_03.jpg" width="240"/>
 <br/>
-<br/>
 <img src="readme_images/create_chat_04.jpg" width="240"/>
-<br/>
 <br/>
 <img src="readme_images/create_chat_05.jpg" width="240"/>
 <br/>
-<br/>
 <img src="readme_images/create_chat_06.jpg" width="240"/>
-<br/>
 <br/>
 <img src="readme_images/create_chat_07.jpg" width="240"/>
 <br/>
-<br/>
 <img src="readme_images/create_chat_08.jpg" width="240"/>
 <br/>
-<br/>
 <img src="readme_images/create_chat_09.jpg" width="240"/>
-<br/>
 <br/>
 <img src="readme_images/create_chat_10.jpg" width="240"/>
 
 5. Дізнатися id групи, можна переглянути тут ```https://api.telegram.org/bot<BOT_TOKEN>/getUpdates``` (my_chat_member --> chat --> id)
 
-<img src="readme_images/chat_id.jpg" width="240"/>
+<img src="readme_images/chat_id.jpg" width="320"/>
 
 6. Створити в корені проекту файл token.txt і там вказати токен бота та id групи:
 ```commandline
