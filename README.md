@@ -7,10 +7,52 @@
 2. Клонувати проект ```git clone https://github.com/VladimirKritov/hata.git```
 3. Створити telegram бота та отримати токен.
    1. Через пошук у telegram знайти бота @BotFather
+   
+   <img src="readme_images/token_01.jpg" width="240"/>
+   
    2. За допомогою команди ```/newbot``` створити нового бота: <ім'я бота>_bot.
+   
+   <img src="readme_images/token_02.jpg" width="240"/>
+   
    3. Зберегти токен після створення бота.
+   
+   <img src="readme_images/token_03.jpg" width="240"/>
+   
 4. Створити у telegram групу та додати туди створеного бота. *Обов'язково додати бота в адміністратори групи!*.
+
+<img src="readme_images/create_chat_01.jpg" width="240"/>
+<br/>
+<br/>
+<img src="readme_images/create_chat_02.jpg" width="240"/>
+<br/>
+<br/>
+<img src="readme_images/create_chat_03.jpg" width="240"/>
+<br/>
+<br/>
+<img src="readme_images/create_chat_04.jpg" width="240"/>
+<br/>
+<br/>
+<img src="readme_images/create_chat_05.jpg" width="240"/>
+<br/>
+<br/>
+<img src="readme_images/create_chat_06.jpg" width="240"/>
+<br/>
+<br/>
+<img src="readme_images/create_chat_07.jpg" width="240"/>
+<br/>
+<br/>
+<img src="readme_images/create_chat_08.jpg" width="240"/>
+<br/>
+<br/>
+<img src="readme_images/create_chat_09.jpg" width="240"/>
+<br/>
+<br/>
+<img src="readme_images/create_chat_10.jpg" width="240"/>
+
 5. Дізнатися id групи, можна переглянути тут ```https://api.telegram.org/bot<BOT_TOKEN>/getUpdates``` (my_chat_member --> chat --> id)
+
+<img src="readme_images/chat_id.jpg" width="240"/>
+
 6. Створити в корені проекту файл token.txt і там вказати токен бота та id групи:
 ```commandline
 <BOT_TOKEN>
