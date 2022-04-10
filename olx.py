@@ -8,7 +8,8 @@ import requests
 from telegram import send_telegram
 from constants import (
     CITIES, EMPTY_LOCATOR, FOUND_LOCATOR, TITLE_LOCATOR, PRICE_LOCATOR,
-    IMAGE_LOCATOR, LOCATION_LOCATOR, SEARCH, OLX_HOST, FLAT, HOUSE, STOP_WORDS
+    IMAGE_LOCATOR, LOCATION_LOCATOR, DISTANCE, OLX_HOST, FLAT, HOUSE,
+    STOP_WORDS
 )
 
 
@@ -89,9 +90,9 @@ def run(city=None, hata='flat'):
         raise Exception(f'Можна вказати населений пункт зі списку: {cities}')
 
     if hata.lower() == 'flat':
-        REQUESTS = [f"{OLX_HOST}/{FLAT}/{city}/{SEARCH}" for city in cities]
+        REQUESTS = [f"{OLX_HOST}/{FLAT}/{city}/{DISTANCE}" for city in cities]
     elif hata.lower() == 'house':
-        REQUESTS = [f"{OLX_HOST}/{HOUSE}/{city}/{SEARCH}" for city in cities]
+        REQUESTS = [f"{OLX_HOST}/{HOUSE}/{city}/{DISTANCE}" for city in cities]
     else:
         raise Exception('Потрібно правильно вказати тип житла: flat або house')
 
