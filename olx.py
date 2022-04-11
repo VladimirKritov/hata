@@ -39,7 +39,7 @@ def find_in_olx(data):
             link.get('href') for link in soup.select(FOUND_LOCATOR)
         ]
         images = [
-            img.get('src') for img in soup.select(IMAGE_LOCATOR)
+            img.get('src').split(';')[0] for img in soup.select(IMAGE_LOCATOR)
         ]
         titles = [
             title.string for title in soup.select(TITLE_LOCATOR)

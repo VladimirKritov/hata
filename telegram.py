@@ -11,6 +11,8 @@ def send_telegram(text, img):
     r = requests.get(url)
 
     print('\n@@@ @@@ @@@   T E L E G R A M   @@@ @@@ @@@')
+    print(repr(url))
+    print('\n')
     print(r.text)
     print('@@@ @@@ @@@   T E L E G R A M   @@@ @@@ @@@\n')
     return r.json()['ok']
