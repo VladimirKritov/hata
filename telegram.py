@@ -10,10 +10,6 @@ def send_telegram(text, img):
     )
     r = requests.get(url)
 
-    if r.status_code != 200:
-        print('\n### ### ### ### ### ### ###')
-        print(r.status_code)
-        print('### ### ### ### ### ### ###\n')
     print('\n@@@ @@@ @@@   T E L E G R A M   @@@ @@@ @@@')
     print(r.text)
     print('@@@ @@@ @@@   T E L E G R A M   @@@ @@@ @@@\n')

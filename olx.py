@@ -80,12 +80,8 @@ def find_in_olx(data):
                     )
                 else:
                     print(f'Знайдено стоп слово "{stop}" у назві "{title}"')
-                if stop or sent_status == 'true':
-                    print('### ### ### ### ### ### ###')
-                    print(f'href = {href}')
-                    print(f'stop = {stop}')
-                    print(f'sent_status = {sent_status}')
-                    print('### ### ### ### ### ### ###')
+
+                if stop or sent_status:
                     write_data(format_href)
 
 
