@@ -66,20 +66,23 @@ def find_in_olx(data):
                 print(format_href)
 
                 stop = False
+                sent_status = 'false'
                 for stop_word in STOP_WORDS:
                     if stop_word.lower() in title.lower():
                         stop = stop_word
                         break
 
                 if not stop:
-                    send_telegram(
+                    sent_status = send_telegram(
                         text=f'{location}\n{price}'
                              f'\n{title}\n\n{format_href}',
                         img=image
                     )
                 else:
                     print(f'Знайдено стоп слово "{stop}" у назві "{title}"')
-                write_data(format_href)
+
+                if stop or sent_status:
+                    write_data(format_href)
 
 
 def run(city=None, hata='flat'):
