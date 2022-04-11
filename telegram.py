@@ -17,6 +17,7 @@ def send_telegram(text, img):
     print('\n@@@ @@@ @@@   T E L E G R A M   @@@ @@@ @@@')
     print(r.text)
     print('@@@ @@@ @@@   T E L E G R A M   @@@ @@@ @@@\n')
+    return r.json()['ok']
 
 
 if __name__ == '__main__':
