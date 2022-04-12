@@ -1,6 +1,6 @@
 import sys
 import time
-from datetime import datetime
+import logging
 
 import bs4
 import requests
@@ -10,6 +10,13 @@ from constants import (
     CITIES, EMPTY_LOCATOR, FOUND_LOCATOR, TITLE_LOCATOR, PRICE_LOCATOR,
     IMAGE_LOCATOR, LOCATION_LOCATOR, DISTANCE, OLX_HOST, FLAT, HOUSE,
     STOP_WORDS
+)
+
+
+logging.basicConfig(
+    format='%(asctime)s - %(message)s',
+    datefmt='%d-%b-%y %H:%M:%S',
+    level=logging.INFO
 )
 
 
@@ -25,13 +32,12 @@ def write_data(href):
 
 def find_in_olx(data):
     req, city = data
-    print(datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
-    print(req)
+    logging.info(f'[olx.ua] Пошук оголошень: {req}')
 
     res = requests.get(req)
     soup = bs4.BeautifulSoup(res.text, features="html.parser")
     if soup.select(EMPTY_LOCATOR):
-        print('Нічого не знайдено!\n')
+        logging.info('[olx.ua] Нічого не знайдено!')
     elif soup.select(FOUND_LOCATOR):
         hrefs = [
             link.get('href') for link in soup.select(FOUND_LOCATOR)
@@ -61,7 +67,9 @@ def find_in_olx(data):
             format_href = href.split('#')[0]
 
             if format_href not in old_hrefs:
-                print(format_href)
+                logging.info(
+                    f'[olx.ua] Знайдено нове оголошення: {format_href}'
+                )
 
                 stop = False
                 sent_status = 'false'
@@ -77,7 +85,10 @@ def find_in_olx(data):
                         img=image
                     )
                 else:
-                    print(f'Знайдено стоп слово "{stop}" у назві "{title}"')
+                    logging.info(
+                        f'[olx.ua] Знайдено стоп слово "{stop}" '
+                        f'у назві "{title}"'
+                    )
 
                 if stop or sent_status:
                     write_data(format_href)
@@ -123,4 +134,4 @@ if __name__ == '__main__':
             hata = sys.argv[1]
         run(city=city, hata=hata)
     except Exception as e:
-        print(f'{city}\n\n{e}')
+        logging.info(f'[olx.ua] Щось пішло не так: {city}\n\n{e}')
