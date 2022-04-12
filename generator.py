@@ -1,8 +1,16 @@
+import logging
+
 from constants import CITIES
 
 
+logging.basicConfig(
+    format='%(asctime)s - %(message)s',
+    datefmt='%d-%b-%y %H:%M:%S',
+    level=logging.INFO
+)
+
+
 def generate_docker_compose_yaml():
-    print('### ### ### ### ### ### ### ### ### ###')
     with open('docker-compose.yml', 'w') as file:
         main_block = """
 version: '3'
@@ -27,8 +35,9 @@ services:
     command: python olx.py house {city}
             """
             file.write(flat_and_house_block)
-            print(f'Generate for {city}')
-    print('### ### ### ### ### ### ### ### ### ###')
+            logging.info(
+                f'[generator] Створення конфігу для населеного пункту: {city}'
+            )
 
 
 if __name__ == '__main__':
