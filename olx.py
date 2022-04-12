@@ -27,14 +27,12 @@ def find_in_olx(data):
     req, city = data
     print(datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
     print(req)
-    print('\n')
 
     res = requests.get(req)
     soup = bs4.BeautifulSoup(res.text, features="html.parser")
     if soup.select(EMPTY_LOCATOR):
-        print('Нічого не знайдено!')
-        print('### ### ### ### ### ### ###\n')
-    else:
+        print('Нічого не знайдено!\n')
+    elif soup.select(FOUND_LOCATOR):
         hrefs = [
             link.get('href') for link in soup.select(FOUND_LOCATOR)
         ]
@@ -83,6 +81,8 @@ def find_in_olx(data):
 
                 if stop or sent_status:
                     write_data(format_href)
+    else:
+        raise Exception(f'Треба перевірити локатори!\n{req}\n')
 
 
 def run(city=None, hata='flat'):
