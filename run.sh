@@ -1,12 +1,7 @@
 #!/bin/bash
 
 python3 generator.py
-
-echo '### ###  docker-compose.yml ### ### ###'
-echo '### ### ### ### ### ### ### ### ### ###'
 cat docker-compose.yml
-echo '\n'
-echo '### ### ### ### ### ### ### ### ### ###'
 echo '\n'
 
 while :
