@@ -1,3 +1,5 @@
+#!/bin/bash
+
 mkdir data
 touch data/data.txt
 touch data/locations.txt
