@@ -1,9 +1,9 @@
 # telegram
-with open('token.txt', 'r') as file:
+with open('data/token.txt', 'r') as file:
     TOKEN, CHAT_ID = [line.strip() for line in file]
 
 # olx.ua
-with open('locations.txt', 'r') as file:
+with open('data/locations.txt', 'r') as file:
     CITIES = [line.strip() for line in file]
 
 EMPTY_LOCATOR = ".emptynew h1"

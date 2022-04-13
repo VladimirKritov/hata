@@ -56,7 +56,8 @@
 
 <img src="readme_images/chat_id.jpg" width="320"/>
 
-9. Створити в корені проекту файл token.txt і там вказати токен бота та id групи:
+9. Виконати команду запуску у терміналі для ініціалізації файлів: ```sh init.sh```
+10. В файлі **data/token.txt** вказати токен бота та id групи:
 ```commandline
 <BOT_TOKEN>
 <CHAT_ID>
@@ -66,7 +67,7 @@
 5114004139:AAEKliiwO-MPm2PDhb5Ej5wcztBre4TGIUU
 -1051663062839
 ```
-10. Створити в корені проекту файл locations.txt і там вказати населені пункти, в яких необхідно здійснювати пошук. Написання населених пунктів необхідно брати з урла на olx.ua, вибираючи там локацію. Наприклад в https://www.olx.ua/d/nedvizhimost/kvartiry/dolgosrochnaya-arenda-kvartir/ternopol/?currency=UAH беремо ternopol
+10. В файлі **data/locations.txt** вказати населені пункти, в яких необхідно здійснювати пошук. Написання населених пунктів необхідно брати з урла на olx.ua, вибираючи там локацію. Наприклад в https://www.olx.ua/d/nedvizhimost/kvartiry/dolgosrochnaya-arenda-kvartir/ternopol/?currency=UAH беремо ternopol
 ```commandline
 chernovtsy
 ternopol
