@@ -21,12 +21,12 @@ logging.basicConfig(
 
 
 def read_data():
-    with open('data.txt', 'r') as file:
+    with open('data/data.txt', 'r') as file:
         return [href[:-1] for href in file.readlines()]
 
 
 def write_data(href):
-    with open('data.txt', 'a') as file:
+    with open('data/data.txt', 'a') as file:
         file.write(href + '\n')
 
 
