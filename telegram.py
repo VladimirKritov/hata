@@ -21,7 +21,7 @@ def send_telegram(text, img):
     logging.info(
         f'[telegram] Результат надсилання повідомлення до telegram: {r.text}'
     )
-    return r.json()['ok']
+    return r.json()
 
 
 if __name__ == '__main__':

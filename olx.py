@@ -62,6 +62,8 @@ def find_in_olx(data):
         old_hrefs = read_data()
         hrefs_and_images = zip(hrefs, images, titles, prices, locations)
 
+        ad_found = False
+
         for href_image in hrefs_and_images:
             href, image, title, price, location = href_image
             format_href = href.split('#')[0]
@@ -70,7 +72,7 @@ def find_in_olx(data):
                 logging.info(
                     f'[olx.ua] Знайдено нове оголошення: {format_href}'
                 )
-
+                ad_found = True
                 stop = False
                 sent_status = 'false'
                 for stop_word in STOP_WORDS:
@@ -92,6 +94,18 @@ def find_in_olx(data):
 
                 if stop or sent_status:
                     write_data(format_href)
+                elif (
+                        sent_status.get('error_code') == 400 and
+                        sent_status.get('description') ==
+                        "Bad Request: wrong file identifier/HTTP URL specified"
+                ):
+                    logging.info(
+                        f'[olx.ua] Проблема з оголошенням {format_href} '
+                        f'({sent_status.get("description")})'
+                    )
+                    write_data(format_href)
+        if not ad_found:
+            logging.info('[olx.ua] Нових оголошень поки що немає')
     else:
         raise Exception(f'Треба перевірити локатори!\n{req}\n')
 
