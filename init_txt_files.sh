@@ -1,6 +1,5 @@
 #!/bin/bash
 
 mkdir data
-touch data/data.txt
-touch data/locations.txt
-touch data/token.txt
+touch config.py
+# python3 config.py

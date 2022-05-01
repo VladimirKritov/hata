@@ -1,6 +1,6 @@
 import logging
 
-from constants import CITIES
+from config import CHATS
 
 
 logging.basicConfig(
@@ -18,26 +18,28 @@ version: '3'
 services:
         """
         file.write(main_block)
-        for city in CITIES:
-            flat_and_house_block = f"""
-  {city}_flat:
+        for chat in CHATS.keys():
+            for location in CHATS[chat]['locations']:
+                flat_and_house_block = f"""
+  {location}_flat:
     build:
       context: .
     volumes:
       - ./:/home/project
-    command: python olx.py flat {city}
+    command: python olx.py flat {location} {CHATS[chat]['id']}
 
-  {city}_house:
+  {location}_house:
     build:
       context: .
     volumes:
       - ./:/home/project
-    command: python olx.py house {city}
+    command: python olx.py house {location} {CHATS[chat]['id']}
             """
-            file.write(flat_and_house_block)
-            logging.info(
-                f'[generator] Створення конфігу для населеного пункту: {city}'
-            )
+                file.write(flat_and_house_block)
+                logging.info(
+                    f'[generator] Створення конфігу для населеного '
+                    f'пункту: {location}'
+                )
 
 
 if __name__ == '__main__':
