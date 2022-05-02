@@ -1,3 +1,4 @@
+import os.path
 import logging
 
 from config import CHATS
@@ -36,6 +37,12 @@ services:
     command: python olx.py house {location} {CHATS[chat]['id']}
             """
                 file.write(flat_and_house_block)
+                file_path = f"data/data_{CHATS[chat]['id']}.txt"
+                if not os.path.exists(file_path):
+                    with open(file_path, 'w'):
+                        logging.info(
+                            f'[generator] Створення файлу: {file_path}'
+                        )
                 logging.info(
                     f'[generator] Створення конфігу для населеного '
                     f'пункту: {location}'

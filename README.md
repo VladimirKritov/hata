@@ -47,29 +47,53 @@
 
 <img src="readme_images/chat_id.jpg" width="320"/>
 
-9. Виконати команду у терміналі для ініціалізації txt файлів: ```sh init_txt_files.sh```
-10. В файлі **token.txt** (розташування data / token.txt) вказати токен бота та id групи:
+9. Виконати команду у терміналі для ініціалізації файлу конфігурації, який потрібно буде трохи виправити: ```sh init_config.sh```
+10. В файлі **config.py** вказати токен бота, id групи та локації пошуку. **Можна одночасно шукати у різних локаціях та надсилати оголошення до різних груп!** Написання локацій населених пунктів необхідно брати з урла на olx.ua, вибираючи там локацію. Наприклад в https://www.olx.ua/d/nedvizhimost/kvartiry/dolgosrochnaya-arenda-kvartir/ternopol/?currency=UAH беремо ternopol:
 ```commandline
-<BOT_TOKEN>
-<CHAT_ID>
+TOKEN = '<bot_token>'
+CHATS = {
+    # Вибрані міста
+    'ukraine': {
+        'id': 000000000,  # <chat_id>
+        'locations': [
+            'chernovtsy', 'ternopol', 'ivano-frankovsk', 'kolomyya',
+            'yaremche', 'sokal', 'chervonograd'
+        ],
+    },
+    # Закарпатьска область
+    'zak_region': {
+        'id': 000000000,  # <chat_id>
+        'locations': ['zak']
+    },
+    # Київ
+    'kyiv': {
+        'id': 000000000,  # <chat_id>
+        'locations': ['kiev']
+    },
+}
 ```
 Приклад:
 ```commandline
-5114004139:AAEKliiwO-MPm2PDhb5Ej5wcztBre4TGIUU
--1051663062839
+TOKEN = '5114004139:AAEKliiwO-MPm2PDhb5Ej5wcztBre4TGIUU'
+CHATS = {
+    # Вибрані міста
+    'ukraine': {
+        'id': 1051663062839,
+        'locations': [
+            'chernovtsy', 'ternopol', 'ivano-frankovsk', 'kolomyya',
+            'yaremche', 'sokal', 'chervonograd'
+        ],
+    },
+    # Закарпатьска область
+    'zak_region': {
+        'id': 2051663062833,
+        'locations': ['zak']
+    },
+    # Київ
+    'kyiv': {
+        'id': 3051663062835,
+        'locations': ['kiev']
+    },
+}
 ```
-11. В файлі **locations.txt** (розташування data / locations.txt) вказати населені пункти, в яких необхідно здійснювати пошук. Написання населених пунктів необхідно брати з урла на olx.ua, вибираючи там локацію. Наприклад в https://www.olx.ua/d/nedvizhimost/kvartiry/dolgosrochnaya-arenda-kvartir/ternopol/?currency=UAH беремо ternopol
-```commandline
-chernovtsy
-ternopol
-uzhgorod
-```
-12. Виконати команду запуску у терміналі: ```sudo sh run.sh```
-
-## VirtualBox
-
-1. Встановити VirtualBox для своєї операційної системи https://www.virtualbox.org/wiki/Downloads
-2. Завантажити та встановити образ з Ubuntu https://drive.google.com/drive/folders/1stTqH8I9JHPmjIK4DKLap-3B4hp0n8f9, в якому вже виконано перші п'ять пунктів
-3. Запустити віртуалку, пароль ```hata```
-4. Щоб потрапити до директорії з сервісом необхідно відкрити термінал та виконати команду ```cd hata```
-5. Залишилося виконати налаштування пов'язані з telegram: створити бота, групу та прописати токен бота з id створеної групи (це пункти з 6 по 10).  В 11 пункті правильно вибрати та прописати необхідні населені пункти.  І нарешті використати команду запуску сервісу з 12 пункта.
+11. Виконати команду запуску у терміналі: ```sudo sh run.sh```
