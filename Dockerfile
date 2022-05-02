@@ -1,7 +1,5 @@
 FROM python:3.10.4-alpine3.15
 
-ENV WORKSPACE /home/project
-
 WORKDIR /home/project
 COPY requirements.txt /home/project
 
