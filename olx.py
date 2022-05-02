@@ -7,7 +7,7 @@ import requests
 
 from telegram import send_telegram
 from constants import (
-    CITIES, EMPTY_LOCATOR, FOUND_LOCATOR, TITLE_LOCATOR, PRICE_LOCATOR,
+    EMPTY_LOCATOR, FOUND_LOCATOR, TITLE_LOCATOR, PRICE_LOCATOR,
     IMAGE_LOCATOR, LOCATION_LOCATOR, DISTANCE, OLX_HOST, FLAT, HOUSE,
     STOP_WORDS
 )
@@ -20,21 +20,20 @@ logging.basicConfig(
 )
 
 
-def read_data():
-    with open('data/data.txt', 'r') as file:
+def read_data(chat_id):
+    with open(f'data/data_{chat_id}.txt', 'r') as file:
         return [href[:-1] for href in file.readlines()]
 
 
-def write_data(href):
-    with open('data/data.txt', 'a') as file:
+def write_data(href, chat_id):
+    with open(f'data/data_{chat_id}.txt', 'a') as file:
         file.write(href + '\n')
 
 
-def find_in_olx(data):
-    req, city = data
-    logging.info(f'[olx.ua] Пошук оголошень: {req}')
+def find_in_olx(requests_url, chat_id):
+    logging.info(f'[olx.ua] Пошук оголошень: {requests_url}')
 
-    res = requests.get(req)
+    res = requests.get(requests_url)
     soup = bs4.BeautifulSoup(res.text, features="html.parser")
     if soup.select(EMPTY_LOCATOR):
         logging.info('[olx.ua] Нічого не знайдено!')
@@ -59,7 +58,7 @@ def find_in_olx(data):
             if 'location-filled' in str(location)
         ]
 
-        old_hrefs = read_data()
+        old_hrefs = read_data(chat_id=chat_id)
         hrefs_and_images = zip(hrefs, images, titles, prices, locations)
 
         ad_found = False
@@ -84,7 +83,8 @@ def find_in_olx(data):
                     sent_status = send_telegram(
                         text=f'{location}\n{price}'
                              f'\n{title}\n\n{format_href}',
-                        img=image
+                        img=image,
+                        chat_id=chat_id,
                     )
                 else:
                     logging.info(
@@ -93,7 +93,7 @@ def find_in_olx(data):
                     )
 
                 if stop or sent_status:
-                    write_data(format_href)
+                    write_data(href=format_href, chat_id=chat_id)
                 elif (
                         sent_status.get('error_code') == 400 and
                         sent_status.get('description') ==
@@ -103,49 +103,28 @@ def find_in_olx(data):
                         f'[olx.ua] Проблема з оголошенням {format_href} '
                         f'({sent_status.get("description")})'
                     )
-                    write_data(format_href)
+                    write_data(href=format_href, chat_id=chat_id)
         if not ad_found:
             logging.info('[olx.ua] Нових оголошень поки що немає')
     else:
         raise Exception(f'Треба перевірити локатори!\n{req}\n')
 
 
-def run(city=None, hata='flat'):
-    cities = CITIES
-    if city in cities:
-        cities = [city, ]
-    elif city is not None:
-        raise Exception(f'Можна вказати населений пункт зі списку: {cities}')
-
+def run(city=None, hata=None, chat_id=None):
     if hata.lower() == 'flat':
-        REQUESTS = [f"{OLX_HOST}/{FLAT}/{city}/{DISTANCE}" for city in cities]
+        requests_url = f"{OLX_HOST}/{FLAT}/{city}/{DISTANCE}"
     elif hata.lower() == 'house':
-        REQUESTS = [f"{OLX_HOST}/{HOUSE}/{city}/{DISTANCE}" for city in cities]
+        requests_url = f"{OLX_HOST}/{HOUSE}/{city}/{DISTANCE}"
     else:
         raise Exception('Потрібно правильно вказати тип житла: flat або house')
 
     while True:
-        for data in zip(REQUESTS, cities):
-            find_in_olx(data)
-            time.sleep(30)
+        find_in_olx(requests_url=requests_url, chat_id=chat_id)
+        time.sleep(30)
 
 
 if __name__ == '__main__':
-    city = None
-    hata = 'flat'
-    try:
-        if len(sys.argv) > 3:
-            raise Exception(
-                'Можна використовувати лише два аргументи. Перший тип житла: '
-                'flat або house. За замовчуванням стоїть flat. І другим '
-                'аргументом можна вказати населений пункт лише у якому '
-                'треба шукати!'
-            )
-        elif len(sys.argv) == 3:
-            hata = sys.argv[1]
-            city = sys.argv[2]
-        elif len(sys.argv) == 2:
-            hata = sys.argv[1]
-        run(city=city, hata=hata)
-    except Exception as e:
-        logging.info(f'[olx.ua] Щось пішло не так: {city}\n\n{e}')
+    hata = sys.argv[1]
+    city = sys.argv[2]
+    chat_id = sys.argv[3]
+    run(city=city, hata=hata, chat_id=chat_id)

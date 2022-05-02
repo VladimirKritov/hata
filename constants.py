@@ -1,11 +1,3 @@
-# telegram
-with open('data/token.txt', 'r') as file:
-    TOKEN, CHAT_ID = [line.strip() for line in file]
-
-# olx.ua
-with open('data/locations.txt', 'r') as file:
-    CITIES = [line.strip() for line in file]
-
 EMPTY_LOCATOR = ".emptynew h1"
 FOUND_LOCATOR = "#offers_table h3 a"
 IMAGE_LOCATOR = "#offers_table img"

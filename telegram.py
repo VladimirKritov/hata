@@ -1,7 +1,7 @@
 import logging
 import requests
 
-from constants import TOKEN, CHAT_ID
+from config import TOKEN
 
 
 logging.basicConfig(
@@ -11,10 +11,10 @@ logging.basicConfig(
 )
 
 
-def send_telegram(text, img):
+def send_telegram(text, img, chat_id):
     url = (
         f'https://api.telegram.org/bot{TOKEN}/sendPhoto?'
-        f'chat_id={CHAT_ID}&photo={img}&caption={text}'
+        f'chat_id=-{chat_id}&photo={img}&caption={text}'
     )
     logging.info(f'[telegram] Надсилання повідомлення в telegram: {repr(url)}')
     r = requests.get(url)
