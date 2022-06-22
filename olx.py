@@ -9,7 +9,7 @@ from telegram import send_telegram
 from constants import (
     EMPTY_LOCATOR, FOUND_LOCATOR, TITLE_LOCATOR, PRICE_LOCATOR,
     IMAGE_LOCATOR, LOCATION_LOCATOR, DISTANCE, OLX_HOST, FLAT, HOUSE,
-    STOP_WORDS
+    STOP_WORDS, FOUND_BLOCK_CLASS
 )
 
 
@@ -40,27 +40,31 @@ def find_in_olx(requests_url, chat_id):
 
         res = requests.get(requests_url)
         soup = bs4.BeautifulSoup(res.text, features="html.parser")
+        soup.find()
         if ' 0 ' in soup.select(EMPTY_LOCATOR)[0]:
             logging.info('[olx.ua] Нічого не знайдено!')
             olx_work = True
             break
-        elif soup.select(FOUND_LOCATOR):
+        elif soup.find('div', class_=FOUND_BLOCK_CLASS):
+            needful_block = soup.find('div', class_=FOUND_BLOCK_CLASS)
             hrefs = [
-                link.get('href') for link in soup.select(FOUND_LOCATOR)
+                link.get('href') for link in
+                needful_block.select(FOUND_LOCATOR)
             ]
             images = [
                 img.get('src').split(';')[0] for img in
-                soup.select(IMAGE_LOCATOR)
+                needful_block.select(IMAGE_LOCATOR)
             ]
             titles = [
-                title.string for title in soup.select(TITLE_LOCATOR)
+                title.string for title in needful_block.select(TITLE_LOCATOR)
             ]
             prices = [
-                price.contents[0] for price in soup.select(PRICE_LOCATOR)
+                price.contents[0] for price in
+                needful_block.select(PRICE_LOCATOR)
             ]
             locations = [
                 location.contents[0] for location in
-                soup.select(LOCATION_LOCATOR)
+                needful_block.select(LOCATION_LOCATOR)
             ]
 
             old_hrefs = read_data(chat_id=chat_id)

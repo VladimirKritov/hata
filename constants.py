@@ -1,3 +1,4 @@
+FOUND_BLOCK_CLASS = 'css-14fnihb'
 EMPTY_LOCATOR = '[data-testid="total-count"]'
 FOUND_LOCATOR = '[data-cy="l-card"] a'
 IMAGE_LOCATOR = '[data-cy="l-card"] img'
