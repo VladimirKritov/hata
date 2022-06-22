@@ -1,10 +1,11 @@
-EMPTY_LOCATOR = ".emptynew h1"
-FOUND_LOCATOR = "#offers_table h3 a"
-IMAGE_LOCATOR = "#offers_table img"
-TITLE_LOCATOR = "#offers_table h3 strong"
-PRICE_LOCATOR = "#offers_table p.price strong"
-LOCATION_LOCATOR = '#offers_table .bottom-cell span'
-OLX_HOST = "https://www.olx.ua/nedvizhimost"
+FOUND_BLOCK_CLASS = 'css-14fnihb'
+EMPTY_LOCATOR = '[data-testid="total-count"]'
+FOUND_LOCATOR = '[data-cy="l-card"] a'
+IMAGE_LOCATOR = '[data-cy="l-card"] img'
+TITLE_LOCATOR = '[data-cy="l-card"] h6'
+PRICE_LOCATOR = '[data-cy="l-card"] [data-testid="ad-price"]'
+LOCATION_LOCATOR = '[data-cy="l-card"] [data-testid="location-date"]'
+OLX_HOST = "https://www.olx.ua/d/uk/nedvizhimost"
 FLAT = "kvartiry/dolgosrochnaya-arenda-kvartir"
 HOUSE = "doma/arenda-domov"
 DISTANCE = "?search%5Bdist%5D=0"
